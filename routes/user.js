@@ -9,7 +9,11 @@ userRoute.get('/', userFunctions.user_list)
 
 userRoute.get('/:id', userFunctions.user_get);
 
-userRoute.post('/', validator(userValidationSchema), userFunctions.user_post)
+userRoute.post('/', validator(userValidationSchema), userFunctions.user_post);
+
+userRoute.delete('/:id', userFunctions.user_delete);
+
+userRoute.put('/:id', userFunctions.user_put);
 
 
 module.exports = userRoute;

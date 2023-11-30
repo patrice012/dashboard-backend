@@ -1,6 +1,7 @@
 const User = require('../models/user/userModel');
 
 
+// handle GET request
 const user_list = async (req, res) => {
   try {
     const result = await User.find();
@@ -17,6 +18,7 @@ const user_list = async (req, res) => {
   }
 }
 
+// handle GET request base on ID
 const user_get = async (req, res) => {
   const { id } = req.params;
   try {
@@ -34,6 +36,7 @@ const user_get = async (req, res) => {
   }
 }
 
+// handle POST request
 const user_post = async (req, res) => {
   try {
     const user = new User(req.body);
@@ -46,6 +49,7 @@ const user_post = async (req, res) => {
   }
 }
 
+// handle DELETE request
 const user_delete = async (req, res) => {
   const { id } = req.params;
   try {
@@ -58,5 +62,27 @@ const user_delete = async (req, res) => {
   }
 }
 
+// handle PUT request
+const user_put = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const user = await User.findById(id);
+    if (!user) {
+      res.status(404).json({ mesage: 'Not found.' });
+      return
+    };
+    const updateData = req.body;
+    for (const [key, value] of Object.entries(updateData)) {
+      user[key] = value;
+    }
+    const newData = await user.save();
+    res.json({ data: newData });
+    return;
+  } catch {
+    error => console.log(error)
+    return;
+  }
+}
 
-module.exports = { user_list, user_get, user_post, user_delete }
+
+module.exports = { user_list, user_get, user_post, user_delete, user_put }
