@@ -84,5 +84,26 @@ const user_put = async (req, res) => {
   }
 }
 
+// handle PUT request
+const user_patch = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const user = await User.findById(id);
+    if (!user) {
+      res.status(404).json({ mesage: 'Not found.' });
+      return
+    };
+    const updateData = req.body;
+    for (const [key, value] of Object.entries(updateData)) {
+      user[key] = value;
+    }
+    const newData = await user.save();
+    res.json({ data: newData });
+    return;
+  } catch {
+    error => console.log(error)
+    return;
+  }
+}
 
-module.exports = { user_list, user_get, user_post, user_delete, user_put }
+module.exports = { user_list, user_get, user_post, user_delete, user_put, user_patch }
