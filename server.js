@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // connect to DB
-const db_URI = 'mongodb://localhost:27017/dashboard';
+const db_URI = 'mongodb://localhost:27017/dashboardDB';
 mongoose.set("strictQuery", false);
 mongoose.connect(db_URI);
 
