@@ -17,5 +17,4 @@ userRoute.put('/:id', userFunctions.user_put);
 
 userRoute.patch('/:id', userFunctions.user_patch);
 
-
 module.exports = userRoute;
