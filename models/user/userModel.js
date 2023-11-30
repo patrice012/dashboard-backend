@@ -1,4 +1,3 @@
-const { string } = require('joi');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -14,13 +13,13 @@ const contryCode = {
 // create document schema
 const userSchema = new Schema({
   name: {
-    type: string,
+    type: String,
     required: true,
     minLength: 2,
     maxLength: 244,
   },
   country: {
-    type: string,
+    type: String,
     required: true,
     minLength: 1,
     maxLength: 244,
@@ -32,21 +31,21 @@ const userSchema = new Schema({
     get: () => this.path
   },
   language: {
-    type: string,
+    type: String,
     required: true
   },
   occupation: {
-    type: string,
+    type: String,
     minLength: 4,
     maxLength: 244,
   },
   objective: {
-    type: string,
+    type: String,
     minLength: 4,
     maxLength: 244,
   },
   subscription: {
-    type: string,
+    type: String,
     minLength: 4,
     maxLength: 100,
   },
@@ -57,6 +56,6 @@ const userSchema = new Schema({
 }, { timestamps: true })
 
 // create schema model
-const User = mongoose.Model('User', userSchema);
+const User = mongoose.model('User', userSchema);
 
 module.exports = User
