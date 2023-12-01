@@ -1,10 +1,11 @@
+const { createConnection } = require('mongoose');
 const User = require('../models/user/userModel');
 
 
 // handle GET request
 const user_list = async (req, res) => {
   try {
-    const result = await User.find();
+    const result = await User.find().sort('-createdAt');
     if (!result) {
       res.status(404).json({ message: "Not found" });
       return;
@@ -13,7 +14,6 @@ const user_list = async (req, res) => {
     return;
   } catch {
     error => console.log(error)
-    res.json({ message: error })
     return;
   }
 }

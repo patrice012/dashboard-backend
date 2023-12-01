@@ -32,15 +32,6 @@ app.use((req, res, next) => {
 });
 
 
-
-
-
-
-
-
-
-
-
 // connect to DB
 const db_uri = DB_URI || 'mongodb://localhost:27017/dashboardDB';
 mongoose.set("strictQuery", false);
