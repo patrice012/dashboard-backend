@@ -47,8 +47,11 @@ db.on('error', err => {
 })
 
 
-// user endpoint
+// data endpoint
 app.use('/data', userRoute)
+
+// auth user endpoint
+app.use('/user', userRoute)
 
 
 // open port
