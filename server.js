@@ -1,10 +1,9 @@
 const express = require('express');
-const dotenv = require('dotenv');
-dotenv.config();
+const cors = require('cors');
+const { PORT, DB_URI, ORIGIN } = require('./config');
 const mongoose = require('mongoose');
-// create express app
+
 const app = express();
-// import route
 const userRoute = require('./routes/user');
 
 // middleware
@@ -12,10 +11,40 @@ app.use(express.urlencoded({ extended: false }));
 // body parsing
 app.use(express.json());
 
+
+// cors
+app.use(
+  cors({
+    origin: ORIGIN,
+    optionSuccessStatus: 200,
+  })
+);
+
+// set headers globally
+app.use((req, res, next) => {
+  res.set({
+    "Access-Control-Allow-Origin": ORIGIN,
+    "Access-Control-Allow-Credentials": true,
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS, PUT, PATCH",
+    "Access-Control-Allow-Headers": "Origin, Content-Type, Accept",
+  });
+  next();
+});
+
+
+
+
+
+
+
+
+
+
+
 // connect to DB
-const DB_URI = process.env.DB_URI || 'mongodb://localhost:27017/dashboardDB';
+const db_uri = DB_URI || 'mongodb://localhost:27017/dashboardDB';
 mongoose.set("strictQuery", false);
-mongoose.connect(DB_URI);
+mongoose.connect(db_uri);
 
 // test db connection
 const db = mongoose.connection
@@ -28,11 +57,11 @@ db.on('error', err => {
 
 
 // user endpoint
-app.use('/user', userRoute)
+app.use('/data', userRoute)
 
 
 // open port
-const port = process.env.PORT || 3000;
+const port = PORT || 3000;
 app.listen(port, () => {
   console.log(`App listening on port ${port}!`);
 })

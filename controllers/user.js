@@ -9,7 +9,7 @@ const user_list = async (req, res) => {
       res.status(404).json({ message: "Not found" });
       return;
     }
-    res.json({ data: result });
+    res.json(result);
     return;
   } catch {
     error => console.log(error)
@@ -27,11 +27,10 @@ const user_get = async (req, res) => {
       res.status(404).json({ message: "Not found" });
       return;
     }
-    res.json({ data: user });
+    res.json(user);
     return;
   } catch {
     error => console.log(error)
-    res.json({ message: error })
     return;
   }
 }
@@ -41,7 +40,7 @@ const user_post = async (req, res) => {
   try {
     const user = new User(req.body);
     const userData = await user.save();
-    res.json({ data: userData });
+    res.json(userData);
     return;
   } catch {
     error => console.log(error)
@@ -76,7 +75,7 @@ const user_put = async (req, res) => {
       user[key] = value;
     }
     const newData = await user.save();
-    res.json({ data: newData });
+    res.json( newData );
     return;
   } catch {
     error => console.log(error)
@@ -98,7 +97,7 @@ const user_patch = async (req, res) => {
       user[key] = value;
     }
     const newData = await user.save();
-    res.json({ data: newData });
+    res.json(newData);
     return;
   } catch {
     error => console.log(error)
