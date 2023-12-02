@@ -83,7 +83,7 @@ const user_put = async (req, res) => {
   }
 }
 
-// handle PUT request
+// handle PATCH request
 const user_patch = async (req, res) => {
   const { id } = req.params;
   try {
