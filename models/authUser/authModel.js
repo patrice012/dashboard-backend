@@ -6,7 +6,7 @@ const AuthUserSchema = new Schema({
         type: String,
         required: true,
         minLength: 2,
-        maxLength: 244,
+        maxLength: 100,
     },
     picture: {
         type: String,
