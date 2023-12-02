@@ -3,7 +3,6 @@ const AuthModel = require("../models/authUser/authModel");
 const authUser_list = async (req, res) => {
     try {
         const result = await AuthModel.find().sort("-createdAt");
-        console.log(result, "result");
         if (!result) {
             res.status(404).json({ message: "Not found" });
             return;
@@ -38,7 +37,6 @@ const authUser_post = async (req, res) => {
             picture: req.file.filename,
         });
         const newData = await authUser.save();
-        console.log(newData);
         res.status(201).json(newData);
         return;
     } catch {

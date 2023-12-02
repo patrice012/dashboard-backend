@@ -17,6 +17,9 @@ app.use(express.json());
 // uncomment after placing your favicon in /static
 //app.use(favicon(path.join(__dirname, 'static', 'favicon.ico')));
 
+// serve public folder
+app.use("/public", express.static(__dirname + "/public"));
+
 // log using Morgan
 app.use(logger("dev"));
 
