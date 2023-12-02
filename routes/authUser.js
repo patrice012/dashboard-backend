@@ -3,17 +3,17 @@ const authRoute = express.Router();
 const upload = require("../middleware/multerMiddleware");
 const validator = require("../middleware/validationMiddleware");
 const AuthUserValidationSchema = require("../models/authUser/authValidation");
+const authUserFunc = require("../controllers/authUser");
+
+authRoute.get("/", authUserFunc.authUser_list);
+
+authRoute.get("/:id", authUserFunc.authUser_get);
 
 authRoute.post(
     "/",
     upload.single("image"),
     validator(AuthUserValidationSchema),
-    (req, res) => {
-        console.log(req.body);
-        console.log(req.file);
-        res.json({ message: "success" });
-        return;
-    }
+    authUserFunc.authUser_post
 );
 
 module.exports = authRoute;
