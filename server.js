@@ -6,7 +6,6 @@ const mongoose = require("mongoose");
 const app = express();
 const userRoute = require("./routes/user");
 const authRoute = require("./routes/authUser");
-const upload = require("./middleware/multerMiddleware");
 
 // middleware
 app.use(express.urlencoded({ extended: false }));
@@ -37,6 +36,7 @@ const db_uri = DB_URI || "mongodb://localhost:27017/dashboardDB";
 mongoose.set("strictQuery", false);
 mongoose.connect(db_uri);
 
+
 // test db connection
 const db = mongoose.connection;
 db.once("open", (_) => {
@@ -46,11 +46,14 @@ db.on("error", (err) => {
     console.error("connection error:", err);
 });
 
+
 // data endpoint
 app.use("/data", userRoute);
 
+
 // auth user endpoint
 app.use("/user", authRoute);
+
 
 // open port
 const port = PORT || 3000;
